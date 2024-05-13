@@ -16,7 +16,7 @@ const Cards = ({ id, title, handleClick, image }) => {
           boxShadow: "0 0 10px 0 rgba(0,0,0,0.2)",
         },
       }}
-      onClick={handleClick(id)}
+      onClick={() => handleClick(id)}
     >
       <CardMedia
         sx={{

@@ -33,6 +33,7 @@ import { useTheme } from "@mui/material";
 
 const Page = () => {
   const screenSize = React.useContext(ScreenSizeContext);
+  const fileInputRef = React.useRef(null);
   const [fileName, setFileName] = useState("");
   const theme = useTheme();
 
@@ -42,6 +43,7 @@ const Page = () => {
       setFileName(file.name);
     }
   };
+
   const StyledFab = styled(Fab)({
     position: "absolute",
     zIndex: 1,
@@ -70,7 +72,7 @@ const Page = () => {
   ];
 
   const handleClick = (id) => {
-    console.log("clicked");
+    console.log(id);
     setActiveTab(id);
   };
 
@@ -158,10 +160,17 @@ const Page = () => {
             <StyledFab
               color="secondary"
               aria-label="add"
-              onClick={handleFileUpload}
+              onClick={() => fileInputRef.current.click()}
             >
               <AddIcon />
             </StyledFab>
+            <input
+              type="file"
+              accept="image/*,.pdf"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleFileUpload}
+            />
             <Box sx={{ flexGrow: 1 }} />
             <IconButton color="inherit">
               <SearchIcon />
