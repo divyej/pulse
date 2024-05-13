@@ -26,10 +26,15 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Fab from "@mui/material/Fab";
 import styled from "@mui/material/styles/styled";
 import ScreenSizeContext from "../../theme/screenSizeContext";
+import feedback from "../../assets/feed.png";
+import hospitalInfo from "../../assets/hospitalInfo.png";
+import maintainance from "../../assets/maintainance.png";
+import { useTheme } from "@mui/material";
 
 const Page = () => {
   const screenSize = React.useContext(ScreenSizeContext);
   const [fileName, setFileName] = useState("");
+  const theme = useTheme();
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -50,14 +55,17 @@ const Page = () => {
     {
       id: 1,
       title: "Hospital Information",
+      image: hospitalInfo,
     },
     {
       id: 2,
       title: "HouseKeeping And Maintainance",
+      image: maintainance,
     },
     {
       id: 3,
       title: "Feedback And Suggestions",
+      image: feedback,
     },
   ];
 
@@ -77,60 +85,81 @@ const Page = () => {
     },
   ];
   return (
-    <Stack
-      sx={{
-        width: "100%",
-        height: "100%",
-        padding: 1,
-      }}
-      spacing={1}
-    >
-      <Tabs>
-        <Tab label="Overview" />
-        <Tab label="Services" />
-        <Tab label="Reports" />
-      </Tabs>
-      <Paper
-        elevation={0}
+    <>
+      <Stack
         sx={{
-          padding: 2,
-          justifyContent: "center",
-          alignItems: "center",
           width: "100%",
           height: "100%",
-          backgroundColor: "#f5f5f5",
-          borderRadius: 2,
+          padding: 1,
         }}
+        spacing={1}
       >
-        <Grid container spacing={2} flexGrow={1}>
-          {ServicesData.map((data) => (
-            <Grid item xs={12} sm={6} md={4} lg={4} key={data.id}>
-              <Cards title={data.title} onClick={handleClick} />
-            </Grid>
-          ))}
-        </Grid>
-      </Paper>
-      <Divider />
-      {screenSize !== "xs" ? (
-        <Stack direction="column" spacing={2}>
-          <Typography variant="h6">Reports</Typography>
-          <UploadButton
-            setFileName={setFileName}
-            fileName={fileName}
-            handleFileUpload={handleFileUpload}
-          />
+        <Stack
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Tabs>
+            <Tab label="Overview" />
+            <Tab label="Services" />
+            <Tab label="Reports" />
+          </Tabs>
         </Stack>
-      ) : (
+        <Paper
+          elevation={0}
+          sx={{
+            padding: 2,
+            mt: 1,
+            borderRadius: 8,
+            flexGrow: 1,
+            boxShadow: "none",
+            justifyContent: "center",
+            backgroundColor: theme.palette.surface.paper,
+            overflowY: "auto",
+            scrollbarWidth: "none",
+          }}
+        >
+          <Grid container spacing={2} flexGrow={1}>
+            {ServicesData.map((data) => (
+              <Grid item xs={12} sm={6} md={4} lg={4} key={data.id}>
+                <Cards
+                  id={data.id}
+                  title={data.title}
+                  image={data.image}
+                  handleClick={handleClick}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
+        <Divider />
+        {screenSize !== "xs" && (
+          <Stack direction="column" spacing={2}>
+            <Typography variant="h6">Reports</Typography>
+            <UploadButton
+              setFileName={setFileName}
+              fileName={fileName}
+              handleFileUpload={handleFileUpload}
+            />
+          </Stack>
+        )}
+      </Stack>
+      {screenSize === "xs" && (
         <AppBar
           position="fixed"
           color="primary"
-          sx={{ top: "auto", bottom: 0 }}
+          sx={{ top: "auto", bottom: 0, z: "1000" }}
         >
           <Toolbar>
             <IconButton color="inherit" aria-label="open drawer">
               <MenuIcon />
             </IconButton>
-            <StyledFab color="secondary" aria-label="add">
+            <StyledFab
+              color="secondary"
+              aria-label="add"
+              onClick={handleFileUpload}
+            >
               <AddIcon />
             </StyledFab>
             <Box sx={{ flexGrow: 1 }} />
@@ -143,7 +172,7 @@ const Page = () => {
           </Toolbar>
         </AppBar>
       )}
-    </Stack>
+    </>
   );
 };
 

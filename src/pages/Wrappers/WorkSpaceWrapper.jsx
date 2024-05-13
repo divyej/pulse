@@ -7,7 +7,6 @@ const WorkSpaceWrapper = ({ children }) => {
       sx={{
         height: `calc(100%)-${"80px"}`,
         overflow: "auto",  
-     
       }}
     >
       {children}
