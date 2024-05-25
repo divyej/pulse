@@ -10,9 +10,12 @@ const TopBarWrapper = ({ children }) => {
         justifyContent: "space-between",
         alignItems: "center",
         height: "80px",
+        width: "100%",
       }}
     >
-      <Stack direction="row" >
+      <Stack direction="row" sx={{
+        width: "100%",
+      }}>
         {/* {screenSize === "xs" && (
           <>
             <IconButton

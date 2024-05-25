@@ -1,11 +1,11 @@
 import React from "react";
-import { Routes as ReactRouterRoutes, Route, Navigate } from "react-router-dom";
+import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
 import Services from "./pages/Workspace/Services";
 
 const Routes = () => {
   return (
     <ReactRouterRoutes>
-      <Route path="/" element={<Services />} />
+      <Route path="/:id" element={<Services />} />
     </ReactRouterRoutes>
   );
 };
