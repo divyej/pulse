@@ -5,7 +5,7 @@ const WorkSpaceWrapper = ({ children }) => {
   return (
     <Box
       sx={{
-        height: `calc(100%)-${"80px"}`,
+        height: "calc(100vh - 80px)", // 64px is the height of the top bar
         overflow: "auto",  
       }}
     >

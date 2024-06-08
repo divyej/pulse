@@ -13,7 +13,7 @@ const AppContainer = ({ children }) => {
         sx={{
           height: "100vh",
           marginLeft: screenSize !== "xs" ? "80px" : "0px",
-          width: screenSize !== "xs" ? `calc(100% - ${"80px"})` : "100vw",
+          width: screenSize !== "xs" ? `calc(100% - 80px)` : "100vw",
           overflow: "auto",
           backgroundColor: "#fff",
         }}

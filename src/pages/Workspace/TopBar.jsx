@@ -1,9 +1,10 @@
 import React from "react";
 import { Typography, Stack, Avatar, IconButton } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
+// import { Bed } from "@mui/icons-material";
 
-const Topbar = ({ data }) => {
-  const title = data?.title || "Number";
+const Topbar = ({ room }) => {
+  console.log(room);
 
   return (
     
@@ -28,7 +29,7 @@ const Topbar = ({ data }) => {
           <Avatar />
           <Stack direction={"column"}>
             <Typography variant="h6" noWrap>
-              Room {title}
+             {room.qrCodeData[0].roomNo}/{room.qrCodeData[0].bedNo}
             </Typography>
 
             <Typography variant="body2" noWrap>

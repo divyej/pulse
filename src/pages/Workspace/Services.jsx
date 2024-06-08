@@ -5,30 +5,25 @@ import TopBarWrapper from "../Wrappers/TopBarWrapper";
 import Topbar from "./TopBar";
 import Page from "./Page";
 import { useParams } from "react-router-dom";
-import { fetchRoomInfo } from "../../apis/getRoomInfo";
+//import { fetchRoomInfo } from "../../apis/getRoomInfo";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { roomInfo } from "../../appRedux/qrInfo";
+import { getRoomInfo } from "../../appRedux/qrInfo";
 
 const Services = () => {
+  const dispatch= useDispatch();
+  const room= useSelector(roomInfo)
   const { id } = useParams();
   useEffect(() => {
-    fetchRoomInfo(id).then((data) => {
-      try {
-        console.log(data);
-      }
-      catch (e) {
-       throw new Error(e);
-      }
-    }
-    );
-
+  dispatch(getRoomInfo(id))
   }
   , [id]);
 
   return (
     <AppContainer>
         <TopBarWrapper >
-            <Topbar />
+            <Topbar room={room} />
         </TopBarWrapper>
       <WorkSpaceWrapper>
         <Page />
