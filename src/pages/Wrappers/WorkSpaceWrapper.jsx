@@ -12,6 +12,6 @@ const WorkSpaceWrapper = ({ children }) => {
       {children}
     </Box>
   );
-};
+}; 
 
 export default WorkSpaceWrapper;
